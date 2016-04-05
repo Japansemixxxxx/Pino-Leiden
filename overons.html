@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="author">
+    <title>Pino Leiden</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type=
+    "text/css">
+    <link href=
+    "http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic"
+    rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel=
+    "stylesheet" type="text/css">
+    <style type="text/css">
+        /* Set a size for our map container, the Google Map will take up 100% of this container */
+        #map {
+          width: 100%;
+          height: 287px;
+          margin-top: 0px;
+
+        }
+    </style><!--
+        You need to include this script tag on any page that has a Google Map.
+
+        The following script tag will work when opening this example locally on your computer.
+        But if you use this on a localhost server or a live website you will need to include an API key.
+        Sign up for one here (it's free for small usage):
+            https://developers.google.com/maps/documentation/javascript/tutorial#api_key
+
+        After you sign up, use the following script tag with YOUR_GOOGLE_API_KEY replaced with your actual key.
+            <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_API_KEY&sensor=false"></script>
+    -->
+
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false" type=
+    "text/javascript">
+    </script>
+    <script type="text/javascript">
+        // When the window has finished loading create our google map below
+        google.maps.event.addDomListener(window, 'load', init);
+
+        function init() {
+            // Basic options for a simple Google Map
+            // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
+            var mapOptions = {
+                // How zoomed in you want the map to start at (always required)
+                zoom: 17,
+
+                // The latitude and longitude to center the map (always required)
+                center: new google.maps.LatLng(52.1599233, 4.4968193), // New York52.1599233,4.4968193
+
+                // How you would like to style the map.
+                // This is where you would paste any style found on Snazzy Maps.
+                styles: [
+    {
+        "featureType": "all",
+        "elementType": "all",
+        "stylers": [
+            {
+                "hue": "#e7ecf0"
+            }
+        ]
+    },
+    {
+        "featureType": "administrative.province",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "administrative.province",
+        "elementType": "geometry.stroke",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "invert_lightness": true
+            },
+            {
+                "weight": "1.22"
+            }
+        ]
+    },
+    {
+        "featureType": "administrative.locality",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "visibility": "simplified"
+            }
+        ]
+    },
+    {
+        "featureType": "administrative.land_parcel",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "all",
+        "stylers": [
+            {
+                "saturation": -70
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "lightness": "0"
+            },
+            {
+                "weight": "0.78"
+            },
+            {
+                "color": "#908f91"
+            },
+            {
+                "saturation": "-3"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "geometry.stroke",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway.controlled_access",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "road.local",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "transit",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "simplified"
+            },
+            {
+                "saturation": -60
+            }
+        ]
+    }
+    ]
+            };
+
+            // Get the HTML DOM element that will contain your map
+            // We are using a div with id="map" seen below in the <body>
+            var mapElement = document.getElementById('map');
+
+            // Create the Google Map using our element and options defined above
+            var map = new google.maps.Map(mapElement, mapOptions);
+
+            // Let's also add a marker while we're at it
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(52.1599233, 4.4968193),
+                map: map,
+                title: 'Snazzy!'
+            });
+        }
+    </script>
+</head>
+<body data-spy="scroll" data-target=".navbar-fixed-top" id="page-top">
+    <!-- Navigation -->
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle" data-target=
+                ".navbar-main-collapse" data-toggle="collapse" type=
+                "button"><i class="fa fa-bars"></i></button> <a class=
+                "navbar-brand page-scroll" href="index.html"><span class=
+                "light"><img alt="" class="img-responsive pino_leiden_logo"
+                src="img_pino_leiden/pino_Logo.png"></span></a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class=
+            "collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="overons.html">Over Ons</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href=
+                        "catering.html">Catering</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container -->
+    </nav><!-- Intro Header -->
+    <header class="intro-2">
+        <div class="pinogedeelte">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        <h1 class="overons_h1">Contact</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sectiongedeelte_contact">
+            <div class="container container_contact">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <div class="col-lg-12">
+                            <h5 class="locatie">Locatie</h5>
+                        </div>
+                        <div class="col-lg-12">
+                            <h6 class="locatie_sub">Hooigracht 106<br>
+                            2312KX Leiden<br>
+                            071-5127573</h6>
+                        </div>
+                        <div class="col-lg-12">
+                            <h5 class="locatie">Contact</h5>
+                        </div>
+                        <div class="col-lg-12">
+                            <h6 class="locatie_sub">U kunt ons bereiken door
+                            te<br>
+                            bellen naar 071-5127573.</h6>
+                        </div>
+                        <div class="col-lg-12">
+                            <span class="fa fa-facebook" style=
+                            "float:left; font-size: 40px; padding-right: 20px; padding-top: 20px;">
+                            </span> <span class="fa fa-twitter" style=
+                            "float:left; font-size: 40px; padding-right: 20px; padding-top: 20px;">
+                            </span> <span class="fa fa-instagram" style=
+                            "float:left; font-size: 40px; padding-top: 20px;"></span>
+                        </div>
+                    </div>
+                    <div class="col-xs-9">
+                        <div id="map"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header><!-- About Section -->
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">Copyright © Pino Leiden 2016.</p><a href=
+            "#"><img alt="" class="img-responsive thuisbezorgd" src=
+            "img/thuisbezorgd.png"></a>
+        </div>
+    </footer>
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false" type=
+    "text/javascript">
+    </script> <!-- jQuery -->
+
+    <script src="js/jquery.js">
+    </script> <!-- Bootstrap Core JavaScript -->
+
+    <script src="js/bootstrap.min.js">
+    </script> <!-- Plugin JavaScript -->
+
+    <script src="js/jquery.easing.min.js">
+    </script>
+    <script src="js/grayscale.js">
+    </script>
+</body>
+</html>
